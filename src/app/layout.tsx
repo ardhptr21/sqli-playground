@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "SQL Injection Playground",
@@ -25,9 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geist.variable} ${geistMono.variable} antialiased font-sans`}
+        className={`${geist.variable} ${geistMono.variable} antialiased font-sans p-16`}
       >
         {children}
+        <Toaster position="top-center" />
       </body>
     </html>
   );
