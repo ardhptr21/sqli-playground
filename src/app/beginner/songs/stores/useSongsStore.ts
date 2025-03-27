@@ -1,10 +1,11 @@
 import { IResponsePayload } from "@/lib/response";
+import { Song } from "@prisma/client";
 import { create } from "zustand";
 
 type SongsStore = {
   search: string;
-  result: IResponsePayload | null;
-  setResult: (result: IResponsePayload<Array<unknown>> | null) => void;
+  result: IResponsePayload<Song[] | null> | null;
+  setResult: (result: IResponsePayload<Song[] | null> | null) => void;
   setSearch: (search: string) => void;
 };
 

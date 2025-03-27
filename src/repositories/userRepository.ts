@@ -1,15 +1,11 @@
 import { prisma } from "@/lib/prisma";
+import { User } from "@prisma/client";
 
-interface GetUserByCredentials {
-  id: number;
-  username: string;
-  password: string;
-}
 export const getUserByCredentials = async (
   username: string,
   password: string
 ) => {
-  const result = await prisma.$queryRawUnsafe<GetUserByCredentials[]>(
+  const result = await prisma.$queryRawUnsafe<User[]>(
     `SELECT * FROM users WHERE username='${username}' AND password='${password}'`
   );
 

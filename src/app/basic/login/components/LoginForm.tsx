@@ -29,7 +29,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="max-w-xl w-full space-y-5">
+    <div className="min-w-xl max-w-xl w-full space-y-5">
       <div className="p-10 border rounded-2xl">
         <form className="space-y-5 w-full" onSubmit={handleSubmit}>
           <div className="grid w-full items-center gap-1.5">
@@ -69,7 +69,7 @@ export default function LoginForm() {
             Login failed
           </p>
         ) : (
-          <p>No Response</p>
+          <p>No Result</p>
         )}
       </div>
     </div>

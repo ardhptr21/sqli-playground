@@ -11,7 +11,7 @@ interface IQueryInfoProps {
 
 export default function QueryInfo({ query, result, onReset }: IQueryInfoProps) {
   return (
-    <div className="w-full">
+    <div className="w-full overflow-hidden">
       <div className="p-10 border rounded-xl space-y-5">
         <div className="space-y-5 w-full">
           <h3 className="text-xl font-semibold">Query</h3>

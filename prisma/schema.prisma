@@ -14,3 +14,11 @@ model User {
 
   @@map("users")
 }
+
+model Song {
+  id     Int    @id @default(autoincrement())
+  title  String
+  artist String
+
+  @@map("songs")
+}
