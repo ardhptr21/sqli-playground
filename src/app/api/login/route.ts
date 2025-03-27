@@ -1,14 +1,8 @@
-import { prisma } from "@/lib/prisma";
 import { Response } from "@/lib/response";
+import { getUserByCredentials } from "@/repositories/userRepository";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 interface ILoginRequest {
-  username: string;
-  password: string;
-}
-
-interface QueryResult {
-  id: number;
   username: string;
   password: string;
 }
@@ -17,15 +11,11 @@ export async function POST(req: Request) {
   const { username, password }: ILoginRequest = await req.json();
 
   try {
-    const result: QueryResult[] = await prisma.$queryRawUnsafe(
-      `SELECT * FROM users WHERE username='${username}' AND password='${password}'`
-    );
+    const user = await getUserByCredentials(username, password);
 
-    if (result.length <= 0) {
+    if (!user) {
       return Response.failed("Login failed").send();
     }
-
-    const user = result[0];
 
     return Response.success(`Logged in as '${user.username}'`).send();
   } catch (error) {
