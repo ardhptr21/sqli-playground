@@ -23,6 +23,21 @@ export default function Home() {
           description="List of songs with SQL injection vulnerability."
           href="/playground/songs"
         />
+        <PlayCard
+          title="Login V2"
+          description="Improvement with some restriction of the login form with SQL injection vulnerability."
+          href="/playground/login/v2"
+        />
+        <PlayCard
+          title="Songs V2"
+          description="Improvement with some restriction of the list of songs with SQL injection vulnerability."
+          href="/playground/songs/v2"
+        />
+      </section>
+      <section className="text-center">
+        <small>
+          Made by <span className="font-bold">@rootkids</span>
+        </small>
       </section>
     </main>
   );

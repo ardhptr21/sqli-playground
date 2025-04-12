@@ -1,15 +1,15 @@
 import Info from "./components/Info";
-import SongsList from "./components/SongsList";
+import LoginForm from "./components/LoginForm";
 
-export default function BeginnerSongs() {
+export default function BasicLogin() {
   return (
     <main>
       <section>
-        <h1 className="text-4xl font-bold">Songs</h1>
+        <h1 className="text-4xl font-bold">Login V2</h1>
       </section>
       <div className="h-16"></div>
       <section className="mt-10 flex justify-between h-fit gap-16 items-start">
-        <SongsList />
+        <LoginForm />
         <Info />
       </section>
     </main>
