@@ -5,7 +5,14 @@ import { useMemo } from "react";
 import { useLoginStore } from "../stores/useLoginStore";
 
 export default function Info() {
-  const { credentials, result, setResult, setCredentials } = useLoginStore();
+  const {
+    credentials,
+    result,
+    setResult,
+    responseTime,
+    setResponseTime,
+    setCredentials,
+  } = useLoginStore();
 
   const query = useMemo(() => {
     return `SELECT * FROM users WHERE username = '${credentials.username}' AND password = '${credentials.password}'`;
@@ -15,9 +22,11 @@ export default function Info() {
     <QueryInfo
       query={query}
       result={result}
+      responseTime={responseTime}
       onReset={() => {
         setCredentials({ username: "", password: "" });
         setResult(null);
+        setResponseTime(0);
       }}
     />
   );

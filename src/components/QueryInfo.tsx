@@ -6,10 +6,16 @@ import { Button } from "./ui/button";
 interface IQueryInfoProps {
   query: string;
   result: { success: boolean; message: string } | null;
+  responseTime?: number;
   onReset?: () => void;
 }
 
-export default function QueryInfo({ query, result, onReset }: IQueryInfoProps) {
+export default function QueryInfo({
+  query,
+  result,
+  responseTime,
+  onReset,
+}: IQueryInfoProps) {
   return (
     <div className="w-full overflow-hidden">
       <div className="p-10 border rounded-xl space-y-5">
@@ -30,6 +36,14 @@ export default function QueryInfo({ query, result, onReset }: IQueryInfoProps) {
             </p>
           ) : (
             <p>No response</p>
+          )}
+        </div>
+        <div className="space-y-3 w-full">
+          <h3 className="text-xl font-semibold">Response Time</h3>
+          {responseTime ? (
+            <p>{responseTime.toFixed(2)} ms</p>
+          ) : (
+            <p>No response time</p>
           )}
         </div>
       </div>

@@ -6,8 +6,10 @@ type LoginStore = {
     username: string;
     password: string;
   };
+  responseTime: number;
   result: IResponsePayload | null;
   setResult: (result: IResponsePayload | null) => void;
+  setResponseTime: (responseTime: number) => void;
   setCredentials: (credentials: {
     username?: string;
     password?: string;
@@ -19,8 +21,10 @@ export const useLoginStore = create<LoginStore>((set) => ({
     username: "",
     password: "",
   },
+  responseTime: 0,
   result: null,
   setResult: (result) => set({ result }),
+  setResponseTime: (responseTime) => set({ responseTime }),
   setCredentials: (credentials) =>
     set((state) => ({
       credentials: {

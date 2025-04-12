@@ -3,28 +3,37 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import React from "react";
-import { useLoginStore } from "../stores/useLoginStore";
-import axios, { AxiosError } from "axios";
 import { IResponsePayload } from "@/lib/response";
-import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import axios, { AxiosError } from "axios";
+import React from "react";
+import { toast } from "sonner";
+import { useLoginStore } from "../stores/useLoginStore";
 
 export default function LoginForm() {
-  const { credentials, result, setCredentials, setResult } = useLoginStore();
+  const { credentials, result, setCredentials, setResult, setResponseTime } =
+    useLoginStore();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const startTime = performance.now();
     try {
       const res = await axios.post("/api/login", credentials);
       setResult(res.data);
     } catch (error) {
+      const endTime = performance.now();
+      const responseTime = endTime - startTime;
+      console.log(`Response time: ${responseTime.toFixed(2)} ms`);
       if (axios.isAxiosError(error)) {
         const err = error as AxiosError<IResponsePayload>;
         setResult(err.response?.data || null);
         return;
       }
       toast.error("An error occurred");
+    } finally {
+      const endTime = performance.now();
+      const responseTime = endTime - startTime;
+      setResponseTime(responseTime);
     }
   };
 

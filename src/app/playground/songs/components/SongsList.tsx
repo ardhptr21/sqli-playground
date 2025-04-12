@@ -18,9 +18,11 @@ import { toast } from "sonner";
 import { useSongsStore } from "../stores/useSongsStore";
 
 export default function SongsList() {
-  const { search, result, setSearch, setResult } = useSongsStore();
+  const { search, result, setSearch, setResult, setResponseTime } =
+    useSongsStore();
 
   const getSongs = async () => {
+    const startTime = performance.now();
     try {
       const res = await axios.get<IResponsePayload<Song[]>>("/api/songs", {
         params: { search },
@@ -33,6 +35,10 @@ export default function SongsList() {
         return;
       }
       toast.error("An error occurred");
+    } finally {
+      const endTime = performance.now();
+      const responseTime = endTime - startTime;
+      setResponseTime(responseTime);
     }
   };
 
