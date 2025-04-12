@@ -1,0 +1,21 @@
+services:
+  app:
+    build: .
+    container_name: sqli_playground
+    ports:
+      - "5173:3000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=mysql://root:root@db:3306/sqli_playground
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sqli_playground
+    volumes:
+      - ./data/sqli_playground.sql:/docker-entrypoint-initdb.d/sqli_playground.sql
