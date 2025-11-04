@@ -1,24 +1,23 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { IResponsePayload } from "@/lib/response";
-import { cn } from "@/lib/utils";
-import axios, { AxiosError } from "axios";
-import React from "react";
-import { toast } from "sonner";
-import { useLoginStore } from "../stores/useLoginStore";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { IResponsePayload } from '@/lib/response';
+import { cn } from '@/lib/utils';
+import axios, { AxiosError } from 'axios';
+import React from 'react';
+import { toast } from 'sonner';
+import { useLoginStore } from '../stores/useLoginStore';
 
 export default function LoginForm() {
-  const { credentials, result, setCredentials, setResult, setResponseTime } =
-    useLoginStore();
+  const { credentials, result, setCredentials, setResult, setResponseTime } = useLoginStore();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const startTime = performance.now();
     try {
-      const res = await axios.post("/api/login", credentials);
+      const res = await axios.post('/api/login', credentials);
       setResult(res.data);
     } catch (error) {
       const endTime = performance.now();
@@ -29,7 +28,7 @@ export default function LoginForm() {
         setResult(err.response?.data || null);
         return;
       }
-      toast.error("An error occurred");
+      toast.error('An error occurred');
     } finally {
       const endTime = performance.now();
       const responseTime = endTime - startTime;
@@ -71,11 +70,11 @@ export default function LoginForm() {
         {result ? (
           <p
             className={cn({
-              "text-green-500": result.success,
-              "text-red-500": !result.success,
+              'text-green-500': result.success,
+              'text-red-500': !result.success,
             })}
           >
-            Login failed
+            {result.message}
           </p>
         ) : (
           <p>No Result</p>
